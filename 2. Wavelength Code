@@ -1,0 +1,29 @@
+function setup() {
+createCanvas(929,749);
+stroke(299);
+strokeWeight(1.2);
+smooth();
+noCursor();
+}
+
+v = 0;
+w = 0;
+
+function draw() {
+background(0)
+rect(0,0,width,height);
+noFill();
+beginShape();
+
+for(x = 0; x < width; x += 1) {
+  vertex(x, height/2+mouseY*0.66
+  *sin(v+(x/map(mouseX,2,width,1,100)))
+  *tan(w+(x/map(mouseY,2,width,100,600)))
+  *sin(v+(x/map(mouseY,2,height,1,100)))
+  );
+}
+endShape();
+v -= 0.02;
+w += 0.04;
+}
+
