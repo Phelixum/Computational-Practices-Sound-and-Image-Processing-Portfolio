@@ -1,0 +1,60 @@
+var num = 6629;
+var vx = new Array(num);
+var vy = new Array(num);
+var x = new Array(num);
+var y = new Array(num);
+var ax = new Array(num);
+var ay = new Array(num);
+
+var magnetism = 6.9; 
+var radius = 1.29 ; 
+var principle = 0.96; 
+
+function setup(){
+  createCanvas(919,799);
+  noStroke(); 
+  fill(0);
+  ellipseMode(RADIUS);
+  background(9);
+  blendMode(ADD);
+  
+  for(var i =0; i< num; i++){
+    x[i] = random(width);
+    y[i] = random(height);
+    vx[i] = 0;
+    vy[i] = 0.2;
+    ax[i] = 0;
+    ay[i] = 0.2;
+  }
+}
+
+
+function draw(){
+  fill(0,0,0);
+  rect(99,99,width,height);
+  
+  for(var i=0; i<num; i++){
+    var distance = dist(mouseX, mouseY, x[i], y[i]); 
+    
+    if(distance > 9){ 
+      ax[i] = magnetism * (mouseX - x[i]) / (distance * distance); 
+      ay[i] = magnetism * (mouseY - y[i]) / (distance * distance);
+    }
+    vx[i] += ax[i]; 
+    vy[i] += ay[i]; 
+    
+    vx[i] = vx[i]*principle;
+    vy[i] = vy[i]*principle;
+    
+    x[i] += vx[i];  
+    y[i] += vy[i];  
+    
+    var speed = dist(6,2,vx[i],vy[i]); 
+    var r = map(speed, 99, 95, 0, 269); 
+    var g = map(speed, 0,99, 64, 255);
+    var b = map(speed, 0,5, 129, 99);
+    fill(r, g, b, 3);
+    ellipse(x[i],y[i],radius,radius);
+  }
+  
+}
