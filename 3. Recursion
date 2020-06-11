@@ -1,0 +1,30 @@
+function setup() {
+  createCanvas(890, 799); 
+  background(0);  
+  
+} 
+
+function draw() {
+  background(0);
+  translate(width/2,height/2);
+  recursionsize(90);
+  noLoop();
+}
+
+function recursionsize(len) {
+  fill(255,5);
+  stroke(255,35);
+  ellipse(0, 0, len, len);
+
+  for(var i=0;i<4;i++)
+  {
+    if(len>6)
+    {
+      push();
+        rotate(i*HALF_PI)
+        translate(0,len*1.618);
+        recursionsize(len*0.618)
+      pop();
+    }
+  }
+}
