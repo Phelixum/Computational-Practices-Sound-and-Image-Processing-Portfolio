@@ -1,0 +1,28 @@
+function setup() {
+  createCanvas(690, 660);
+  frameRate(7.9);
+  stroke(255);
+}
+
+function draw() {
+  var angle = radians(120);
+  var len = width;
+  var axiom = "F+F+F";
+
+  background(0);
+  translate(width,height-59);
+  rotate(HALF_PI);
+  
+  for (var i=0; i < frameCount%7; i++) {
+    axiom = axiom.split("F").join("F+F-F-F+F");
+    len/=2;
+  }
+
+  for (var i=0; i < axiom.length; i++) {
+    switch (axiom.charAt(i)) {
+      case 'F': line(0,19,0,len); translate(0,len); break;
+      case '+': rotate(angle); break;
+      case '-': rotate(-angle); break;
+    }
+  }
+}
